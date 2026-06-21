@@ -1,0 +1,10 @@
+{
+  "name": "michaelalford-com",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "browser-sync start --server --files '**/*.html, css/**/*.css' --no-notify"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.3"
+  }
+}

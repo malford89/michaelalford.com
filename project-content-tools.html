@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listing Generator — Michael Alford</title>
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="images/Simplified-logo.png" alt="Michael Alford" class="nav-logo-img" />Michael Alford</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.html">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="case-study-hero">
+    <a href="index.html" class="back-link">← Back to Work</a>
+    <p class="section-label">Broken Tractor LLC &middot; 2025</p>
+    <h1>AI Listing Generator</h1>
+    <div class="case-meta">
+      <span>Role: Full-Stack Developer</span>
+      <span>Stack: React, Node.js, Anthropic Claude API</span>
+      <span>Built solo in under 30 days</span>
+    </div>
+  </div>
+
+  <div class="case-body">
+
+    <h2>The Problem</h2>
+    <p>
+      Broken Tractor's catalog had grown to over 19,000 products and 3,000 categories — most with
+      incomplete or missing descriptions, titles, and metadata. Writing and publishing listings manually
+      would have taken months of full-time work. The business needed a scalable solution that could
+      produce consistent, on-brand copy at volume without sacrificing quality.
+    </p>
+
+    <!-- Add screenshot here when available -->
+    <!-- <img src="" alt="Listing Generator app screenshot" class="case-image" /> -->
+
+    <h2>The Solution</h2>
+    <p>
+      I designed and built a full-stack internal web application — the <strong>Listing Generator</strong> —
+      that uses the Anthropic Claude API to automatically generate product titles, descriptions, and
+      category copy at scale. The app pulls product data, sends it to the Claude API with carefully
+      engineered prompts, and returns polished, publish-ready content.
+    </p>
+
+    <h2>How It Works</h2>
+    <p>
+      The front end is a React application that lets internal users select products or categories, preview
+      AI-generated content, make edits, and approve listings for publishing. The back end is a Node.js +
+      Express API that handles authentication, communicates with the Anthropic Claude API, and syncs
+      approved content back to BigCommerce via the REST API.
+    </p>
+    <p>
+      Prompt engineering was a core part of the work — crafting system prompts that consistently produced
+      the right tone, format, and keyword structure for tractor parts content at scale.
+    </p>
+
+    <h2>Stack &amp; Tools</h2>
+    <div class="tools-list">
+      <span class="tool-tag">React</span>
+      <span class="tool-tag">Node.js</span>
+      <span class="tool-tag">Express</span>
+      <span class="tool-tag">Anthropic Claude API</span>
+      <span class="tool-tag">BigCommerce REST API</span>
+      <span class="tool-tag">Prompt Engineering</span>
+      <span class="tool-tag">Claude Code</span>
+    </div>
+
+    <h2>Outcome</h2>
+    <p>
+      Delivered solo in under 30 days. The app processed over 19,000 products and 3,000 categories —
+      work that would have taken months manually. It became a core internal tool for ongoing catalog
+      maintenance and new product onboarding at Broken Tractor.
+    </p>
+
+  </div>
+
+  <footer>
+    <p>Michael Alford &mdash; Web Designer &amp; Developer &mdash;
+      <a href="mailto:michael.alford89@gmail.com">michael.alford89@gmail.com</a> &mdash;
+      Baton Rouge, LA
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Machine — Michael Alford</title>
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="images/Simplified-logo.png" alt="Michael Alford" class="nav-logo-img" />Michael Alford</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.html">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="case-study-hero">
+    <a href="index.html" class="back-link">← Back to Work</a>
+    <p class="section-label">Broken Tractor LLC &middot; 2025</p>
+    <h1>My Machine Compatibility Tool</h1>
+    <div class="case-meta">
+      <span>Role: Full-Stack Developer</span>
+      <span>Built solo in under 30 days</span>
+      <span>Live on brokentractor.com</span>
+    </div>
+  </div>
+
+  <div class="case-body">
+
+    <h2>The Problem</h2>
+    <p>
+      Broken Tractor carries over 19,000 SKUs across dozens of brands and hundreds of machine models.
+      Customers frequently couldn't tell whether a part would fit their specific tractor — leading to
+      lost sales, increased support requests, and returns.
+    </p>
+    <p>
+      There was no native BigCommerce feature to handle this level of compatibility filtering. The solution
+      had to be custom-built and had to work within the existing Stencil storefront without disrupting
+      the rest of the site.
+    </p>
+
+    <!-- Add screenshot here when available -->
+    <!-- <img src="" alt="My Machine compatibility tool screenshot" class="case-image" /> -->
+
+    <h2>The Solution</h2>
+    <p>
+      I designed and built a customer-facing compatibility tool called <strong>My Machine</strong>. Shoppers
+      select their tractor brand, machine type, and model from a series of cascading dropdowns. The tool
+      then filters the catalog and surfaces a <strong>Potential Fit</strong> tag on any matching products —
+      giving customers confidence before they add to cart.
+    </p>
+
+    <h2>How It Works</h2>
+    <p>
+      The tool is driven by a compatibility data layer I built and maintains against the product catalog.
+      When a customer selects their machine, the front-end queries the compatibility data and dynamically
+      tags matching products across the 19,000 SKU catalog in real time. The experience is fully integrated
+      into the existing BigCommerce Stencil theme.
+    </p>
+
+    <h2>Tools &amp; Tech</h2>
+    <div class="tools-list">
+      <span class="tool-tag">BigCommerce Stencil</span>
+      <span class="tool-tag">JavaScript</span>
+      <span class="tool-tag">HTML / CSS</span>
+      <span class="tool-tag">BigCommerce REST API</span>
+      <span class="tool-tag">Claude Code</span>
+    </div>
+
+    <h2>Outcome</h2>
+    <p>
+      Delivered solo in under 30 days and shipped live to production. The tool directly addresses one of
+      the highest-friction points in the Broken Tractor shopping experience — helping customers self-serve
+      compatibility questions that previously required contacting support.
+    </p>
+
+  </div>
+
+  <footer>
+    <p>Michael Alford &mdash; Web Designer &amp; Developer &mdash;
+      <a href="mailto:michael.alford89@gmail.com">michael.alford89@gmail.com</a> &mdash;
+      Baton Rouge, LA
+    </p>
+  </footer>
+
+</body>
+</html>
