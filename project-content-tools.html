@@ -30,8 +30,8 @@
     <h1>AI Listing Generator</h1>
     <div class="case-meta">
       <span>Role: Full-Stack Developer</span>
-      <span>Stack: React, Node.js, Anthropic Claude API</span>
-      <span>Built solo in under 30 days</span>
+      <span>Stack: React 19, Node.js, Anthropic Claude API</span>
+      <span>Built solo  -  while learning React</span>
     </div>
   </div>
 
@@ -39,48 +39,155 @@
 
     <h2>The Problem</h2>
     <p>
-      Broken Tractor's catalog had grown to over 20,000 products and 3,000 categories  -  most with
+      Broken Tractor's catalog had grown to nearly 20,000 products and 3,000 categories  -  most with
       incomplete or missing descriptions, titles, and metadata. Writing and publishing listings manually
-      would have taken months of full-time work. The business needed a scalable solution that could
-      produce consistent, on-brand copy at volume without sacrificing quality.
+      would have taken months of full-time work. Beyond creation, there was no way to <em>audit</em> the
+      catalog: no tool could answer "which of our 20,000 listings are missing fitment data?" or "which
+      category descriptions were pasted into the wrong category?" And when a business policy changed  -
+      like a new shipping restriction on glass  -  someone had to find and edit every affected listing by hand.
     </p>
 
-    <!-- Add screenshot here when available -->
-    <!-- <img src="" alt="Listing Generator app screenshot" class="case-image" /> -->
+    <h2>From Side Tool to Platform</h2>
+    <p>
+      The project started as a simple category description generator  -  hence its internal name,
+      "category-generator." But as the team saw what it could do, it kept growing. Today it's a full
+      internal listing platform with eight modules: AI generation for categories and products, rule-based
+      audits across the entire store, plain-English bulk editing, a 404 redirect builder, and a
+      dry-run push pipeline that makes every change reviewable before it touches the live store.
+    </p>
 
-    <h2>The Solution</h2>
-    <p>
-      I designed and built a full-stack internal web application  -  the <strong>Listing Generator</strong>  -
-      that automates BigCommerce product and category listing creation using the Anthropic Claude API.
-      Beyond generating content, it audits the existing store library to identify listings that need
-      attention, and lets the team mass edit content while maintaining business rules.
-    </p>
-    <p>
-      The project started as a simple category description generator  -  but as the team saw what it could
-      do, it expanded into a full listing platform: a product wizard, rule-based store audits, dry-run
-      push reviews, and a complete push history log.
-    </p>
+    <!-- SCREENSHOT: main app with tab bar visible (Categories, Products, Prod Audit, Cat Audit, Bulk Edit, 404 Redirects, Push History) -->
+    <div class="img-placeholder">[ Screenshot: main app dashboard with module tabs ]</div>
 
     <h2>What It Does</h2>
+
+    <h3>Category Generator</h3>
+    <p>
+      Pulls live categories from BigCommerce through a searchable, hierarchical picker (or a quick
+      paste mode), then generates all eight listing fields per category  -  display name, URL, SEO
+      description, page title, meta description, and keywords. Claude receives the category name, its
+      parent, and up to 50 real products from that category as context, so descriptions reflect what's
+      actually in the category. Existing images embedded in old descriptions are automatically preserved.
+    </p>
+
+    <!-- SCREENSHOT: category generator review step with generated fields expanded -->
+    <div class="img-placeholder">[ Screenshot: Category Generator review step ]</div>
+
+    <h3>Product Wizard</h3>
+    <p>
+      Generates complete product listings from raw source data: name, description, page title, meta
+      description, URL, image filename, ten varied alt-text strings, search keywords, and fitment fields.
+      It handles the catalog's special cases  -  kits, glass, LTL freight, YouTube embeds, OEM parts, and
+      rebuild-and-return services  -  each with its own required structure and wording. When the source
+      data is ambiguous, Claude asks clarifying questions instead of guessing; questions export to a
+      styled Excel sheet the team fills in and imports back, and the answers feed the next generation pass.
+    </p>
+
+    <!-- SCREENSHOT: product wizard with a generated listing and the questions panel -->
+    <div class="img-placeholder">[ Screenshot: Product Wizard generated listing ]</div>
+
+    <h3>Product Audit</h3>
+    <p>
+      Scans every SKU in the library against nine rule categories: missing or stub descriptions, old-style
+      listings missing required sections, empty or placeholder fitment data ("TBA"), missing list
+      descriptions, corrupted UTF-8 characters, unprocessed AI output that slipped through, and even
+      misspelled custom field names (caught with fuzzy string matching). Results filter by issue type,
+      category, and storefront visibility  -  and flagged products can be queued straight into the Product
+      Wizard for regeneration, or bulk-hidden from the storefront pending research.
+    </p>
+
+    <!-- SCREENSHOT: product audit table with issue badges and filters -->
+    <div class="img-placeholder">[ Screenshot: Product Audit results with issue flags ]</div>
+
+    <h3>Category Audit</h3>
+    <p>
+      The same idea applied to categories, with a twist: a part-type vocabulary engine. Twelve part-type
+      vocabularies (filters, hydraulics, undercarriage, final drives, cooling, electrical, and so on) score
+      each category's description and meta description against its name  -  so a "Filters" category whose
+      meta description talks about engine manifolds gets flagged as wrong-content, the classic sign of a
+      copy-paste mistake. One click loads the offending category into the generator to fix.
+    </p>
+
+    <!-- SCREENSHOT: category audit issue cards showing a part-type mismatch -->
+    <div class="img-placeholder">[ Screenshot: Category Audit mismatch detection ]</div>
+
+    <h3>Bulk Edit</h3>
+    <p>
+      Mass editing in plain English. A manager types an instruction like "all glass listings must say they
+      ship to the lower 48 states only." Claude interprets it into a structured plan: which fields may
+      change, and which product or category keywords select the targets. The app then shows every matched
+      product <em>with the reason it matched</em>, so false positives are visible and deselectable before
+      anything happens. A second AI pass applies the edit to each product  -  changing only what the
+      instruction requires and preserving everything else. A sanity check warns if the filter catches more
+      than 250 products or 10% of the catalog.
+    </p>
+
+    <!-- SCREENSHOT: bulk edit showing plain-English instruction, interpreted plan, and match reasons -->
+    <div class="img-placeholder">[ Screenshot: Bulk Edit instruction and matched products ]</div>
+
+    <h3>404 Redirect Builder</h3>
+    <p>
+      Turns Google Search Console's 404 report into live 301 redirects. Upload the export, and the app
+      matches each broken URL to its current home  -  first by extracting part numbers from the URL and
+      matching against SKUs (high confidence), then by fuzzy word-similarity scoring against current
+      product and category URLs. Every match shows its confidence level and a one-click link to verify on
+      the live store, unmatched URLs can be fixed manually with a built-in search, and confirmed redirects
+      push to BigCommerce in bulk.
+    </p>
+
+    <!-- SCREENSHOT: redirect builder with confidence-ranked matches -->
+    <div class="img-placeholder">[ Screenshot: 404 Redirect Builder match review ]</div>
+
+    <h3>Push Review &amp; Push History</h3>
+    <p>
+      Nothing reaches the live store blind. Every push starts as a dry run: the server fetches the current
+      BigCommerce state for each item, diffs every field, validates the HTML, and checks for duplicate URLs  -
+      then shows before/after side by side with live character counts against each field's limit. Only after
+      review and an explicit confirmation does the live push run, and if items fail, a retry-failed workflow
+      re-pushes just those without touching the successes. Every session is logged server-side  -  a
+      persistent history of who pushed what, when, with per-item results.
+    </p>
+
+    <!-- SCREENSHOT: push review diff view with before/after fields and character counts -->
+    <div class="img-placeholder">[ Screenshot: Push Review dry-run diff ]</div>
+
+    <h2>Teaching the AI the Business</h2>
+    <p>
+      The hardest engineering in this app isn't the code  -  it's the prompts. The system prompts encode
+      years of business rules so the output is publish-ready, not just plausible:
+    </p>
     <ul>
-      <li><strong>Category Generator</strong>  -  Pulls live categories from BigCommerce, generates SEO descriptions using Claude, and pushes them back in bulk.</li>
-      <li><strong>Product Wizard</strong>  -  Generates complete product listings (name, description, meta, URL, alt text, keywords, and more) from raw source data. Handles special cases like kits, glass, LTL freight, YouTube embeds, OEM parts, and rebuild-and-return services.</li>
-      <li><strong>Product Audit</strong>  -  Searches every SKU in the library and flags listings that need re-edits based on business rules.</li>
-      <li><strong>Category Audit</strong>  -  The same rule-based auditing, applied across all store categories.</li>
-      <li><strong>Push Review</strong>  -  Dry-run preview before any data hits BigCommerce. Shows exactly what fields will change, with a live push and retry-failed workflow.</li>
-      <li><strong>Push History</strong>  -  Persistent server-side log of every push session with per-item results, expandable details, and filter by type.</li>
+      <li><strong>Machine type isolation</strong>  -  the category name is the single source of truth. A backhoe category only ever lists backhoe models, even when the underlying product data spans excavators and skid steers.</li>
+      <li><strong>Special-case handling</strong>  -  glass gets shipping restrictions and inspection language, 150+ lb items get LTL freight wording, kits get a contents section, rebuild-and-return services get exact terminology.</li>
+      <li><strong>Character budgets</strong>  -  every field is generated against BigCommerce's hard limits (90-char product names, 60-char page titles, 160-char meta descriptions), with rules for what to cut first when space runs out  -  and what may never be cut, like part numbers.</li>
+      <li><strong>Never invent</strong>  -  fitment, part numbers, and specs come only from source data. If information is genuinely missing, the model asks a clarifying question instead of guessing.</li>
+      <li><strong>Content preservation</strong>  -  before text goes to Claude, existing links and red-text warnings are swapped for placeholder tokens and restored afterward, so critical content survives regeneration verbatim. YouTube embeds are extracted and re-appended the same way.</li>
     </ul>
 
-    <h2>How It Works</h2>
+    <h2>Under the Hood</h2>
     <p>
-      The front end is a React application that lets internal users select products or categories, preview
-      AI-generated content, make edits, and approve listings for publishing. The back end is a Node.js +
-      Express API that handles authentication, communicates with the Anthropic Claude API, and syncs
-      approved content back to BigCommerce via the REST API.
+      The frontend is a React 19 + Vite app; the backend is an Express server that exists first and
+      foremost to keep API credentials out of the browser  -  every BigCommerce and Anthropic call is
+      proxied server-side. On startup the server syncs the entire catalog (nearly 20,000 products with
+      custom fields, page by page at BigCommerce's 250-item limit) into an in-memory cache, so audits and
+      searches across the whole store are instant.
     </p>
+    <ul>
+      <li><strong>Rate-limit aware</strong>  -  BigCommerce 429 responses are handled by reading the reset header and sleeping exactly that long; Claude overloads retry with backoff.</li>
+      <li><strong>Prompt caching</strong>  -  system prompts use Anthropic's ephemeral cache, cutting input token cost by 90% on every call after the first in a batch.</li>
+      <li><strong>Race-condition safe</strong>  -  generation results write back by ID with per-call tokens, so items can be deleted or reordered mid-generation without corrupting state.</li>
+      <li><strong>Resilient sessions</strong>  -  work in progress persists to localStorage and restores cleanly after a reload, with orphaned in-flight generations reset rather than left hanging.</li>
+      <li><strong>Self-healing HTML</strong>  -  AI-generated markup is repaired via DOMParser and validated for balanced tags before it's allowed anywhere near the store's WYSIWYG fields.</li>
+    </ul>
+
+    <h2>Learning React Along the Way</h2>
     <p>
-      Prompt engineering was a core part of the work  -  crafting system prompts that consistently produced
-      the right tone, format, and keyword structure for tractor parts content at scale.
+      This project had a second job: it's how I learned React. I built a structured curriculum around the
+      app itself  -  a phased syllabus, a written "textbook" where every chapter points at real code in
+      this repo, and a small practice app for trying each concept before applying it to production. State
+      and events, effects and persistence, refs and stale closures  -  each lesson was grounded in a real
+      problem this app had to solve. The result is a production tool <em>and</em> a working knowledge of
+      React earned by shipping it.
     </p>
 
     <h2>Stack &amp; Tools</h2>
@@ -90,6 +197,7 @@
       <span class="tool-tag">Node.js</span>
       <span class="tool-tag">Express</span>
       <span class="tool-tag">Anthropic Claude API</span>
+      <span class="tool-tag">Prompt Caching</span>
       <span class="tool-tag">BigCommerce REST API</span>
       <span class="tool-tag">XLSX Export</span>
       <span class="tool-tag">Prompt Engineering</span>
@@ -98,16 +206,18 @@
 
     <h2>Outcome</h2>
     <p>
-      Delivered solo in under 30 days. The app processed over 20,000 products and 3,000 categories  - 
-      work that would have taken months manually. It became a core internal tool for ongoing catalog
-      maintenance and new product onboarding at Broken Tractor.
+      What began as a description generator became the team's core catalog tool: nearly 20,000 products
+      and 3,000 categories generated, audited, and maintained through one app. Policy changes that used
+      to mean hours of manual edits are now a plain-English instruction with a reviewable diff. Broken
+      links from years of URL changes were reclaimed as 301 redirects. And every change to the live store
+      passes through a dry-run review first  -  scale without losing control.
     </p>
 
   </div>
 
   <footer>
-    <p>Michael Alford  -  Web Designer &amp; Developer  - 
-      <a href="mailto:michael.alford89@gmail.com">michael.alford89@gmail.com</a>  - 
+    <p>Michael Alford  -  Web Designer &amp; Developer  -
+      <a href="mailto:michael.alford89@gmail.com">michael.alford89@gmail.com</a>  -
       Baton Rouge, LA &middot; <a href="https://www.linkedin.com/in/michael-alford-a12a1495/" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="https://github.com/malford89" target="_blank" rel="noopener">GitHub</a>
     </p>
   </footer>
