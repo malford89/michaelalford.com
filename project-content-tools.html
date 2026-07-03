@@ -50,11 +50,21 @@
 
     <h2>The Solution</h2>
     <p>
-      I designed and built a full-stack internal web application  -  the <strong>Listing Generator</strong>  - 
-      that uses the Anthropic Claude API to automatically generate product titles, descriptions, and
-      category copy at scale. The app pulls product data, sends it to the Claude API with carefully
-      engineered prompts, and returns polished, publish-ready content.
+      I designed and built a full-stack internal web application  -  the <strong>Listing Generator</strong>  -
+      that automates BigCommerce product and category listing creation using the Anthropic Claude API.
+      Beyond generating content, it audits the existing store library to identify listings that need
+      attention, and lets the team mass edit content while maintaining business rules.
     </p>
+
+    <h2>What It Does</h2>
+    <ul>
+      <li><strong>Category Generator</strong>  -  Pulls live categories from BigCommerce, generates SEO descriptions using Claude, and pushes them back in bulk.</li>
+      <li><strong>Product Wizard</strong>  -  Generates complete product listings (name, description, meta, URL, alt text, keywords, and more) from raw source data. Handles special cases like kits, glass, LTL freight, YouTube embeds, OEM parts, and rebuild-and-return services.</li>
+      <li><strong>Product Audit</strong>  -  Searches every SKU in the library and flags listings that need re-edits based on business rules.</li>
+      <li><strong>Category Audit</strong>  -  The same rule-based auditing, applied across all store categories.</li>
+      <li><strong>Push Review</strong>  -  Dry-run preview before any data hits BigCommerce. Shows exactly what fields will change, with a live push and retry-failed workflow.</li>
+      <li><strong>Push History</strong>  -  Persistent server-side log of every push session with per-item results, expandable details, and filter by type.</li>
+    </ul>
 
     <h2>How It Works</h2>
     <p>
@@ -70,11 +80,13 @@
 
     <h2>Stack &amp; Tools</h2>
     <div class="tools-list">
-      <span class="tool-tag">React</span>
+      <span class="tool-tag">React 19</span>
+      <span class="tool-tag">Vite</span>
       <span class="tool-tag">Node.js</span>
       <span class="tool-tag">Express</span>
       <span class="tool-tag">Anthropic Claude API</span>
       <span class="tool-tag">BigCommerce REST API</span>
+      <span class="tool-tag">XLSX Export</span>
       <span class="tool-tag">Prompt Engineering</span>
       <span class="tool-tag">Claude Code</span>
     </div>
