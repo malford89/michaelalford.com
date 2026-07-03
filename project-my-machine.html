@@ -13,7 +13,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="My Machine - Michael Alford" />
   <meta property="og:description" content="Case study: a customer-facing compatibility tool that filters 20,000 tractor parts by brand, machine type, and model  -  built solo in under 30 days." />
-  <meta property="og:image" content="https://michaelalford.com/images/new-logo.png" />
+  <meta property="og:image" content="https://michaelalford.com/images/mymachine-category-page.jpg" />
   <meta property="og:url" content="https://michaelalford.com/project-my-machine.html" />
   <meta name="twitter:card" content="summary_large_image" />
 </head>
@@ -56,24 +56,28 @@
       the rest of the site.
     </p>
 
-    <!-- Add screenshot here when available -->
-    <!-- <img src="" alt="My Machine compatibility tool screenshot" class="case-image" loading="lazy" /> -->
-
     <h2>The Solution</h2>
     <p>
       I designed and built a customer-facing compatibility tool called <strong>My Machine</strong>. Shoppers
       select their tractor brand, machine type, and model from a series of cascading dropdowns. The tool
-      then filters the catalog and surfaces a <strong>Potential Fit</strong> tag on any matching products  - 
+      then filters the catalog and surfaces a <strong>Potential Match</strong> tag on any matching products  -
       giving customers confidence before they add to cart.
     </p>
+
+    <img src="images/mymachine-modal.jpg" alt="My Machine selection dialog  -  brand, machine type, and model dropdowns" class="case-image" loading="lazy" />
+    <img src="images/mymachine-panel.jpg" alt="My Machine panel open over a Broken Tractor category page" class="case-image" loading="lazy" />
 
     <h2>How It Works</h2>
     <p>
       The tool is driven by a compatibility data layer I built and maintains against the product catalog.
       When a customer selects their machine, the front-end queries the compatibility data and dynamically
       tags matching products across the 20,000 SKU catalog in real time. The experience is fully integrated
-      into the existing BigCommerce Stencil theme.
+      into the existing BigCommerce Stencil theme  -  the saved machine even takes over the header button
+      and search placeholder, so the whole site reflects what you drive.
     </p>
+
+    <img src="images/mymachine-results.jpg" alt="Category table showing Potential Match for 580C tags on fitting parts" class="case-image" loading="lazy" />
+    <img src="images/mymachine-category-page.jpg" alt="Case Backhoe seal kit category page with My Machine tags and Case 580C header button" class="case-image" loading="lazy" />
 
     <h2>Tools &amp; Tech</h2>
     <div class="tools-list">
