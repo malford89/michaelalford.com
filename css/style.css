@@ -293,6 +293,13 @@ section {
   display: block;
 }
 
+/* For full-page screenshots used as card art: show just the top of the page */
+.project-card-img img.crop-top {
+  height: 230px;
+  object-fit: cover;
+  object-position: top;
+}
+
 .project-card-body {
   padding: 1.5rem;
 }
