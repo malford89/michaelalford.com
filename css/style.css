@@ -172,9 +172,8 @@ nav {
     align-items: flex-start;
     gap: 1.5rem;
   }
-  .hero-logo {
-    width: 180px;
-    height: auto;
+  .hero-logo-wrap {
+    display: none;
   }
 }
 
